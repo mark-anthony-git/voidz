@@ -65,6 +65,9 @@ export const defaultProviderSettings = {
 		region: 'us-east-1', // add region setting
 		endpoint: '', // optionally allow overriding default
 	},
+	zai: {
+		apiKey: '',
+	},
 
 } as const
 
@@ -153,7 +156,7 @@ export const defaultModelsOfProvider = {
 	microsoftAzure: [],
 	awsBedrock: [],
 	liteLLM: [],
-
+	zai: [], // Z.ai models will be dynamically fetched
 
 } as const satisfies Record<ProviderName, string[]>
 
@@ -1447,6 +1450,53 @@ const openRouterSettings: VoidStaticProviderInfo = {
 }
 
 
+// ---------------- ZAI ----------------
+// Z.ai API integration
+const zaiModelOptions = {
+	'zai-coding': {
+		contextWindow: 128_000,
+		reservedOutputTokenSpace: 4_096,
+		cost: { input: 0, output: 0 }, // Z.ai pricing would need to be updated
+		downloadable: false,
+		supportsFIM: false,
+		supportsSystemMessage: 'system-role',
+		reasoningCapabilities: false,
+	},
+	'zai-chat': {
+		contextWindow: 128_000,
+		reservedOutputTokenSpace: 4_096,
+		cost: { input: 0, output: 0 },
+		downloadable: false,
+		supportsFIM: false,
+		supportsSystemMessage: 'system-role',
+		reasoningCapabilities: false,
+	},
+	'zai-instruct': {
+		contextWindow: 128_000,
+		reservedOutputTokenSpace: 4_096,
+		cost: { input: 0, output: 0 },
+		downloadable: false,
+		supportsFIM: false,
+		supportsSystemMessage: 'system-role',
+		reasoningCapabilities: false,
+	},
+} as const satisfies { [s: string]: VoidStaticModelInfo }
+
+const zaiSettings: VoidStaticProviderInfo = {
+	modelOptions: zaiModelOptions,
+	modelOptionsFallback: (modelName) => {
+		const lower = modelName.toLowerCase()
+		let fallbackName: keyof typeof zaiModelOptions | null = null
+		if (lower.includes('coding')) fallbackName = 'zai-coding'
+		if (lower.includes('chat')) fallbackName = 'zai-chat'
+		if (lower.includes('instruct')) fallbackName = 'zai-instruct'
+		if (fallbackName) return { modelName: fallbackName, recognizedModelName: fallbackName, ...zaiModelOptions[fallbackName] }
+		return null
+	},
+	providerReasoningIOSettings: {
+		input: { includeInPayload: openAICompatIncludeInPayloadReasoning },
+	},
+}
 
 
 // ---------------- model settings of everything above ----------------
@@ -1474,7 +1524,10 @@ const modelSettingsOfProvider: { [providerName in ProviderName]: VoidStaticProvi
 	googleVertex: googleVertexSettings,
 	microsoftAzure: microsoftAzureSettings,
 	awsBedrock: awsBedrockSettings,
+	zai: zaiSettings,
 } as const
+
+
 
 
 // ---------------- exports ----------------

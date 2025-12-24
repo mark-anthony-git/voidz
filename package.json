@@ -74,6 +74,7 @@
   "dependencies": {
     "@anthropic-ai/sdk": "^0.40.0",
     "@c4312/eventsource-umd": "^3.0.5",
+    "@electron/get": "^2.0.0",
     "@floating-ui/react": "^0.27.8",
     "@google/genai": "^0.13.0",
     "@microsoft/1ds-core-js": "^3.2.13",
@@ -114,6 +115,7 @@
     "http-proxy-agent": "^7.0.0",
     "https-proxy-agent": "^7.0.2",
     "jschardet": "3.1.4",
+    "jsonc-parser": "^3.3.1",
     "kerberos": "2.1.1",
     "lucide-react": "^0.503.0",
     "marked": "^15.0.11",
@@ -130,6 +132,7 @@
     "react-dom": "^19.1.0",
     "react-tooltip": "^5.28.1",
     "tas-client-umd": "0.2.0",
+    "ternary-stream": "^3.0.0",
     "v8-inspect-profiler": "^0.1.1",
     "vscode-oniguruma": "1.7.0",
     "vscode-regexpp": "^3.1.0",
@@ -148,9 +151,11 @@
     "@types/gulp-svgmin": "^1.2.1",
     "@types/http-proxy-agent": "^2.0.1",
     "@types/kerberos": "^1.1.2",
+    "@types/markdown-it": "^14.1.2",
     "@types/minimist": "^1.2.1",
     "@types/mocha": "^9.1.1",
-    "@types/node": "20.x",
+    "@types/node": "^20.19.27",
+    "@types/parse5": "^6.0.3",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@types/sinon": "^10.0.2",
@@ -164,7 +169,7 @@
     "@types/yauzl": "^2.10.0",
     "@types/yazl": "^2.4.2",
     "@typescript-eslint/utils": "^8.8.0",
-    "@vscode/gulp-electron": "^1.36.0",
+    "@vscode/gulp-electron": "^1.37.0",
     "@vscode/l10n-dev": "0.0.35",
     "@vscode/telemetry-extractor": "^1.10.2",
     "@vscode/test-cli": "^0.0.6",
@@ -256,6 +261,7 @@
     "yaserver": "^0.4.0"
   },
   "overrides": {
+    "@electron/get": "^2.0.0",
     "node-gyp-build": "4.8.1",
     "kerberos@2.1.1": {
       "node-addon-api": "7.1.0"

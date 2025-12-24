@@ -106,6 +106,9 @@ export const displayInfoOfProviderName = (providerName: ProviderName): DisplayIn
 	else if (providerName === 'awsBedrock') {
 		return { title: 'AWS Bedrock', }
 	}
+	else if (providerName === 'zai') {
+		return { title: 'Z.ai', }
+	}
 
 	throw new Error(`descOfProviderName: Unknown provider name: "${providerName}"`)
 }
@@ -128,6 +131,7 @@ export const subTextMdOfProviderName = (providerName: ProviderName): string => {
 	if (providerName === 'vLLM') return 'Read more about custom [Endpoints here](https://docs.vllm.ai/en/latest/getting_started/quickstart.html#openai-compatible-server).'
 	if (providerName === 'lmStudio') return 'Read more about custom [Endpoints here](https://lmstudio.ai/docs/app/api/endpoints/openai).'
 	if (providerName === 'liteLLM') return 'Read more about endpoints [here](https://docs.litellm.ai/docs/providers/openai_compatible).'
+	if (providerName === 'zai') return 'Get your [API Key here](https://z.ai/docs/api-keys).'
 
 	throw new Error(`subTextMdOfProviderName: Unknown provider name: "${providerName}"`)
 }
@@ -154,9 +158,10 @@ export const displayInfoOfSettingName = (providerName: ProviderName, settingName
 										providerName === 'xAI' ? 'xai-key...' :
 											providerName === 'mistral' ? 'api-key...' :
 												providerName === 'googleVertex' ? 'AIzaSy...' :
-													providerName === 'microsoftAzure' ? 'key-...' :
-														providerName === 'awsBedrock' ? 'key-...' :
-															'',
+														providerName === 'microsoftAzure' ? 'key-...' :
+															providerName === 'awsBedrock' ? 'key-...' :
+																providerName === 'zai' ? 'zai-key...' :
+																	'',
 
 			isPasswordField: true,
 		}
@@ -350,6 +355,12 @@ export const defaultSettingsOfProvider: SettingsOfProvider = {
 		...defaultCustomSettings,
 		...defaultProviderSettings.awsBedrock,
 		...modelInfoOfDefaultModelNames(defaultModelsOfProvider.awsBedrock),
+		_didFillInProviderSettings: undefined,
+	},
+	zai: {
+		...defaultCustomSettings,
+		...defaultProviderSettings.zai,
+		...modelInfoOfDefaultModelNames(defaultModelsOfProvider.zai),
 		_didFillInProviderSettings: undefined,
 	},
 }

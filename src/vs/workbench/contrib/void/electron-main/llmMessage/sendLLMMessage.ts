@@ -101,7 +101,7 @@ export const sendLLMMessage = async ({
 
 
 	try {
-		const implementation = sendLLMMessageToProviderImplementation[providerName]
+		const implementation = sendLLMMessageToProviderImplementation[providerName as any]
 		if (!implementation) {
 			onError({ message: `Error: Provider "${providerName}" not recognized.`, fullError: null })
 			return
